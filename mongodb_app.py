@@ -43,15 +43,12 @@ def headerinfo():
     return {'Home': "/", 'Lights': "/lights", 'Special Functions': "/special", 'Rooms': "/rooms", 'Login': '/login'}
 
 
-@app.route('/login')
+@app.route('/')
 def login():
-    return render_template("login.html", header=headerinfo(), active="Login")
+    return render_template("index.html")
 
 
 @app.route('/members')
 @login_required
 def members_page():
     return render_template('member.html')
-
-
-
