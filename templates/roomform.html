@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Room Form{% endblock %}
+
+{% block content %}
+{% for error in form.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
+<div class="container-fluid">
+    <h1>Room Setting</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.room.label }}<br>
+            {{ form.room }}
+        </p>
+        <p>
+            {{ form.intensity.label }}<br>
+            {{ form.intensity(size=32) }}
+        </p>
+        <p>
+            {{ form.onoff.label }}
+            <br>
+            {{ form.onoff() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}

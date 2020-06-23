@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Rooms{% endblock %}
+{% block stylesheet %}
+<!-- stylesheet for rooms.html -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/rooms.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>On / Off</th>
+                <th>Brightness</th>
+            </tr>
+        </thead>        
+        <tbody>
+            {% for i in dict %}
+            <tr>
+                <td>
+                    <img src="/static/images/room{{ i }}.jpg" alt="{{ dict[i]['name'] }}" width="150px">
+                </td>
+                <td>
+                    <label class="switch">
+                        {% if dict[i]['state']['any_on'] == False %}
+                        <input type="checkbox" id="room{{ i }}" onclick="roomonoff('{{ i }}')">
+                        {% else %}
+                        <input type="checkbox" id="room{{ i }}" onclick="roomonoff('{{ i }}')" checked='True'>
+                        {% endif %}
+                        <span class="slider round"></span>                         
+                    </label>
+                </td>
+                <td>
+                    <div class="slidebarcontainer">
+                        <input type="range" min="1" max="255" value="{{ dict[i]['action']['bri'] }}" 
+                        class="sliderbar" id="roomslide{{ i }}" onclick="roomintens('{{ i }}')">
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>        
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/rooms.js') }}"></script>
+{% endblock %}
